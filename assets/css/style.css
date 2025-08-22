@@ -2847,6 +2847,8 @@ textarea.form-control {
   .header-transparent .navbar-brand {
     margin-left: 15px;
     line-height: 80px !important;
+    width: 150px;
+    margin-top: -40px;
   }
 
   .header .header-full .navbar,
