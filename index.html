@@ -16,6 +16,13 @@
 </head>
 
 <body>
+<div id="disabledPage" style="display:none; position:fixed; top:0; left:0; 
+  width:100%; height:100%; background:yellow; z-index:99999;
+  display:flex; justify-content:center; align-items:center; text-align:center; 
+  font-size:2rem; font-weight:bold;">
+  ⚠️ This website is currently unavailable. Please contact TRUEHOLD Logistics.
+</div>
+
   <div class="preloader">
     <div class="loading"><span></span><span></span><span></span><span></span></div>
   </div><!-- /.preloader -->
@@ -605,6 +612,39 @@
     </div><!-- /.module-search-container -->
 
   </div><!-- /.wrapper -->
+<script>
+  // Replace with the RAW URL of your Gist JSON
+  const configUrl = "https://gist.githubusercontent.com/BonoloMilli/ffc3a1bc08b063609c36bc445289239c/raw/60152525c3ffb1da6ec9bfdf452a0ca1b5980113/config.json";
+
+  function checkSiteStatus() {
+    fetch(configUrl)
+      .then(response => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+      })
+      .then(cfg => {
+        if (cfg.status === "off") {
+          document.getElementById("disabledPage").style.display = "flex";
+          document.querySelector(".wrapper").style.display = "none";
+        } else {
+          document.getElementById("disabledPage").style.display = "none";
+          document.querySelector(".wrapper").style.display = "block";
+        }
+      })
+      .catch(err => {
+        console.error("Error fetching config:", err);
+        // Fallback: show the site if config fails
+        document.getElementById("disabledPage").style.display = "none";
+        document.querySelector(".wrapper").style.display = "block";
+      });
+  }
+
+  // Run immediately
+  checkSiteStatus();
+
+  // Poll every 20 seconds (20000 ms)
+  setInterval(checkSiteStatus, 2000);
+</script>
 
   <script src="assets/js/jquery-3.3.1.min.js"></script>
   <script src="assets/js/plugins.js"></script>
