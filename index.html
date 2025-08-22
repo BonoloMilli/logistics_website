@@ -16,11 +16,13 @@
 </head>
 
 <body>
-<div id="disabledPage" style="display:none; position:fixed; top:0; left:0; 
-  width:100%; height:100%; background:yellow; z-index:99999;
-  display:flex; justify-content:center; align-items:center; text-align:center; 
-  font-size:2rem; font-weight:bold;">
-  ⚠️ This website is currently unavailable. Please contact TRUEHOLD Logistics.
+<div id="disabledPage" style="display:none; justify-content:center; align-items:center; height:100vh;">
+  <h1>Site is currently down for maintenance</h1>
+</div>
+
+<div class="wrapper">
+  <!-- Your actual site content goes here -->
+  <h1>Welcome to the website!</h1>
 </div>
 
   <div class="preloader">
@@ -613,37 +615,32 @@
 
   </div><!-- /.wrapper -->
 <script>
-  // Replace with the RAW URL of your Gist JSON
-  const configUrl = "https://gist.githubusercontent.com/BonoloMilli/ffc3a1bc08b063609c36bc445289239c/raw/60152525c3ffb1da6ec9bfdf452a0ca1b5980113/config.json";
+const configUrl = "https://api.jsonbin.io/v3/b/68a8bd87ae596e708fd18166";
 
-  function checkSiteStatus() {
-    fetch(configUrl)
-      .then(response => {
-        if (!response.ok) throw new Error("Network response was not ok");
-        return response.json();
-      })
-      .then(cfg => {
-        if (cfg.status === "off") {
-          document.getElementById("disabledPage").style.display = "flex";
-          document.querySelector(".wrapper").style.display = "none";
-        } else {
-          document.getElementById("disabledPage").style.display = "none";
-          document.querySelector(".wrapper").style.display = "block";
-        }
-      })
-      .catch(err => {
-        console.error("Error fetching config:", err);
-        // Fallback: show the site if config fails
-        document.getElementById("disabledPage").style.display = "none";
-        document.querySelector(".wrapper").style.display = "block";
-      });
-  }
+function checkSiteStatus() {
+  fetch(configUrl)
+    .then(resp => resp.json())
+    .then(cfg => {
+      const wrapper = document.querySelector(".wrapper");
+      const disabled = document.getElementById("disabledPage");
 
-  // Run immediately
-  checkSiteStatus();
+      if(cfg.status === "off"){
+        disabled.style.display = "flex";
+        wrapper.style.display = "none";
+      } else {
+        disabled.style.display = "none";
+        wrapper.style.display = "block";
+      }
+    })
+    .catch(err => {
+      console.warn("Could not fetch status, showing site anyway", err);
+      document.getElementById("disabledPage").style.display = "none";
+      document.querySelector(".wrapper").style.display = "block";
+    });
+}
 
-  // Poll every 20 seconds (20000 ms)
-  setInterval(checkSiteStatus, 2000);
+checkSiteStatus();
+setInterval(checkSiteStatus, 10000); // every 10 sec
 </script>
 
   <script src="assets/js/jquery-3.3.1.min.js"></script>
