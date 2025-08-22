@@ -1,31 +1,3 @@
-<?php
-// --- Website Control Switch ---
-// Create a file called "control.txt" in the same folder as this index.php
-// Inside it, write either: on   OR   off
-$status = trim(file_get_contents("control.txt"));
-
-if ($status === "off") {
-    // Suspended Page
-    echo "<!DOCTYPE html>
-    <html lang='en'>
-    <head>
-      <meta charset='UTF-8'>
-      <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-      <title>Website Suspended</title>
-      <style>
-        body { background:#ffcc00; font-family:Arial, sans-serif; text-align:center; padding:100px; }
-        h1 { font-size:48px; color:#333; }
-        p { font-size:20px; color:#222; }
-      </style>
-    </head>
-    <body>
-      <h1>⚠️ Website Suspended</h1>
-      <p>Please contact TRUEHOLD Logistics to reactivate your subscription.</p>
-    </body>
-    </html>";
-    exit;
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
