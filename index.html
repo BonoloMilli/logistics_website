@@ -16,9 +16,30 @@
 </head>
 
 <body>
-<div id="disabledPage" style="display:none; justify-content:center; align-items:center; height:100vh;">
-  <h1>Site is currently down for maintenance</h1>
-</div>
+ <div id="disabledPage" style="display:flex; justify-content:center; align-items:center; height:100vh;">
+        <div class="floating-shapes">
+            <div class="shape" style="width: 60px; height: 60px; background: linear-gradient(45deg, #ffd700, #ffed4a); border-radius: 12px;"></div>
+            <div class="shape" style="width: 40px; height: 40px; background: linear-gradient(45deg, #ffed4a, #fff59d); border-radius: 50%;"></div>
+            <div class="shape" style="width: 50px; height: 50px; background: linear-gradient(45deg, #fff59d, #ffd700); clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
+            <div class="shape" style="width: 35px; height: 35px; background: linear-gradient(45deg, #ffd700, #ffed4a); transform: rotate(45deg);"></div>
+        </div>
+        
+        <div class="maintenance-container">
+            <div class="icon">🛠️</div>
+            <h1>Site is currently down for maintenance</h1>
+            <p class="subtitle">We're working hard to improve your experience. Our site will be back up and running soon.</p>
+            
+            <div class="status-badge">
+                <div class="pulse-dot"></div>
+                Maintenance in Progress
+            </div>
+            
+            <div class="contact-info">
+                <p>Thank you for your patience.<br>
+                We appreciate your understanding.</p>
+            </div>
+        </div>
+    </div>
 
 
   <div class="preloader">
