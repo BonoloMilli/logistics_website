@@ -611,16 +611,23 @@
 
   </div><!-- /.wrapper -->
 <script>
-const configUrl = "https://api.jsonbin.io/v3/b/68a8bd87ae596e708fd18166";
+const configUrl = "https://api.jsonbin.io/v3/b/68a8bd87ae596e708fd18166/latest";
+const binSecretKey = "$2a$10$5Co2sTmO94QrbaldacWiSO6ZGDaPd0hHZhyqMLCOpgBcT7MZA0.8C"; // replace with your Master Key
 
 function checkSiteStatus() {
-  fetch(configUrl)
+  fetch(configUrl, {
+    method: "GET",
+    headers: {
+      "X-Master-Key": binSecretKey,
+      "Content-Type": "application/json"
+    }
+  })
     .then(resp => resp.json())
     .then(cfg => {
       const wrapper = document.querySelector(".wrapper");
       const disabled = document.getElementById("disabledPage");
 
-      if(cfg.status === "off"){
+      if (cfg.record.status === "off") {
         disabled.style.display = "flex";
         wrapper.style.display = "none";
       } else {
@@ -637,6 +644,7 @@ function checkSiteStatus() {
 
 checkSiteStatus();
 setInterval(checkSiteStatus, 10000); // every 10 sec
+ // every 10 sec
 </script>
 
   <script src="assets/js/jquery-3.3.1.min.js"></script>
